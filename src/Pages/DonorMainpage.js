@@ -14,6 +14,8 @@ const DonorMainpage = () => {
         {id:'2', value: "O-",label:"O-" },
         {id:'3', value: "A+",label:"A+" },
         {id:'4', value: "A-",label:"A-" },
+        {id:'5', value: "B+",label:"B+" },
+        
       ];
       const [selectedbloodgroup, setBloodGroup] = useState("");
       const [name,setName]=useState()

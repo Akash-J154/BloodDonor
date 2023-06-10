@@ -32,6 +32,14 @@ export const Save = ({children})=>{
             "BloodGroup":"A+",
             "Amount":"1"
 
+        },
+        {
+            "Name":"albin",
+            "Location":"kozhikode",
+            "Contact":"13457548",
+            "BloodGroup":"B+",
+            "Amount":"1"
+
         }
         
     ])
@@ -63,6 +71,14 @@ export const Save = ({children})=>{
             "Location":"tvm",
             "Contact":"8078563669",
             "BloodGroup":"A+",
+            "Amount":"1"
+
+        },
+        {
+            "Name":"albin",
+            "Location":"kozhikode",
+            "Contact":"13457548",
+            "BloodGroup":"B+",
             "Amount":"1"
 
         }

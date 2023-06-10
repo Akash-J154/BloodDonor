@@ -13,11 +13,11 @@ const SigninDonor = () => {
         e.preventDefault()
         
         let found = donordetails.find((donor)=>donor.Name===name && donor.Contact===number)
-        let bloodgroup=found.BloodGroup
-        let Location =found.Location
-
-        if(found)
+        if(found){
+          let bloodgroup=found.BloodGroup
+          let Location =found.Location
         nav('/RequestPage',{state:{name,number,bloodgroup,Location }})
+        }
         else
         nav('/DonorMainpage')
     }
