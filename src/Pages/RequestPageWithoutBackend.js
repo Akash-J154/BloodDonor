@@ -1,170 +1,320 @@
-import React, { useContext } from 'react'
-import {useState,useEffect} from 'react'
-import {useNavigate,useLocation} from 'react-router-dom'
-import axios from 'axios'
-import {Link} from 'react-router-dom'
-import { useDetails } from '../hooks/useDetails'
+import React, { useContext } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { useDetails } from "../hooks/useDetails";
+import useNearestLocations from "../hooks/useNearestLocations";
 
 const RequestPageWithoutBackend = () => {
-  
- let {recipientdetails} =useContext(useDetails)
  
- const location = useLocation();
- const { name,number,bloodgroup,Location } = location.state || {};
+  let { recipientdetails } = useContext(useDetails);
+  const [dat, setDat] = useState(null)
+  const location = useLocation();
+  
+  const { name, number, bloodgroup, Location,latitude,longitude } = location.state || {};
+  const [hidden, setHidden] = useState(false);
+  console.log(latitude,longitude)
+  let nearestpositions=useNearestLocations(recipientdetails,latitude,longitude)
+  const handlerf = (item) => {
+    setDat(item);
+    console.log(dat);
+    setHidden(true);
+    console.log(dat)
+  };
+  console.log(nearestpositions.nearestLocations,"ytt")
+  return bloodgroup === "O+" ? (
+    <>
+      {nearestpositions.nearestLocations.map((items, index) => {
+        return (
+          <div className="dialoge-container">
+            <div className="visble">
+              <div className="dia-flex">
+                <label>Name</label>
+                <span>
+                  <label>{items.Name}</label>
+                </span>
+              </div>
 
- return(
-bloodgroup==="O+"?recipientdetails.map((items,index)=>{
-
-            return(
-              
-              <div className='dialoge-container'>
-                
-        <div className='visble'>
-        <div className='dia-flex'>
-          <label>Name</label>
-          <span><label>{items.Name}</label></span>
+              <div className="dia-flex">
+                <label>Blood Group</label>
+                <span>
+                  <label>{items.BloodGroup}</label>
+                </span>
+              </div>
+              <div className="dia-flex">
+                <label>Amount</label>
+                <span>
+                  <label>{items.Amount}</label>
+                </span>
+              </div>
+              <div className="dia-flex">
+                <label>Purpose</label>
+                <span>
+                  <label>Accident</label>
+                </span>
+              </div>
+              <button
+                onClick={() => {
+                  handlerf(items);
+                }}
+                id={index}
+              >
+                Accept
+              </button>
+            </div>
+          </div>
+        );
+      })}
+      {dat && hidden && (
+        <div className="hidden-div">
+          <div className="dia-flex">
+            <label>Purpose</label>
+            <span>
+              <label>Accident</label>
+            </span>
+          </div>
+          <div className="dia-flex">
+            <label>Contact Number</label>
+            <span>
+              <label>{dat.Contact}</label>
+            </span>
+          </div>
+          <button className="message">Message</button>
+          <Link
+            to={{
+              pathname: "/Confirm",
+              search: `?value1=${dat.Name}&value2=${dat.Location}&value2=${dat.BloodGroup}`,
+            }}
+          >
+            Go to Component 2
+          </Link>
         </div>
+      )}
+    </>
+  ) : bloodgroup === "A+" ? (
+    <>
+      {" "}
+      {nearestpositions.nearestLocations
+        .filter((result) => {
+          if (result.BloodGroup === bloodgroup) return result;
+        })
+        .map((items, index) => {
+          return (
+            <div className="dialoge-container">
+              <div className="visble">
+                <div className="dia-flex">
+                  <label>Name</label>
+                  <span>
+                    <label>{items.Name}</label>
+                  </span>
+                </div>
 
-      
-            <div className='dia-flex'>
-              <label>Blood Group</label>
-              <span><label>{items.BloodGroup}</label></span>
-
+                <div className="dia-flex">
+                  <label>Blood Group</label>
+                  <span>
+                    <label>{items.BloodGroup}</label>
+                  </span>
+                </div>
+                <div className="dia-flex">
+                  <label>Amount</label>
+                  <span>
+                    <label>{items.Amount}</label>
+                  </span>
+                </div>
+                <div className="dia-flex">
+                  <label>Purpose</label>
+                  <span>
+                    <label>Accident</label>
+                  </span>
+                </div>
+                <button
+                onClick={() => {
+                  handlerf(items);
+                }}
+                id={index}
+              >
+                Accept
+              </button>
+              </div>
             </div>
-            <div className='dia-flex'>
-              <label>Amount</label>
-              <span><label>{items.Amount}</label></span>
+          );
+        })}{" "}
+      {dat && hidden && (
+        <div className="hidden-div">
+          <div className="dia-flex">
+            <label>Purpose</label>
+            <span>
+              <label>Accident</label>
+            </span>
+          </div>
+          <div className="dia-flex">
+            <label>Contact Number</label>
+            <span>
+              <label>{dat.Contact}</label>
+            </span>
+          </div>
+          <button className="message">Message</button>
+          <Link
+            to={{
+              pathname: "/Confirm",
+              search: `?value1=${dat.Name}&value2=${dat.Location}&value2=${dat.BloodGroup}`,
+            }}
+          >
+            Go to Component 2
+          </Link>
+        </div>
+      )}
+    </>
+  ) : bloodgroup === "O-" ? (
+    <>
+      {nearestpositions.nearestLocations
+        .filter((result) => {
+          if (result.BloodGroup === bloodgroup) return result;
+        })
+        .map((items, index) => {
+          return (
+            <div className="dialoge-container">
+              <div className="visble">
+                <div className="dia-flex">
+                  <label>Name</label>
+                  <span>
+                    <label>{items.Name}</label>
+                  </span>
+                </div>
 
+                <div className="dia-flex">
+                  <label>Blood Group</label>
+                  <span>
+                    <label>{items.BloodGroup}</label>
+                  </span>
+                </div>
+                <div className="dia-flex">
+                  <label>Amount</label>
+                  <span>
+                    <label>{items.Amount}</label>
+                  </span>
+                </div>
+                <div className="dia-flex">
+                  <label>Purpose</label>
+                  <span>
+                    <label>Accident</label>
+                  </span>
+                </div>
+                <button
+                onClick={() => {
+                  handlerf(items);
+                }}
+                id={index}
+              >
+                Accept
+              </button>
+              </div>
             </div>
-            <div className='dia-flex'>
+          );
+        })}{" "}
+      {dat && hidden && (
+        <div className="hidden-div">
+          <div className="dia-flex">
+            <label>Purpose</label>
+            <span>
+              <label>Accident</label>
+            </span>
+          </div>
+          <div className="dia-flex">
+            <label>Contact Number</label>
+            <span>
+              <label>{dat.Contact}</label>
+            </span>
+          </div>
+          <button className="message">Message</button>
+          <Link
+            to={{
+              pathname: "/Confirm",
+              search: `?value1=${dat.Name}&value2=${dat.Location}&value2=${dat.BloodGroup}`,
+            }}
+          >
+            Go to Component 2
+          </Link>
+        </div>
+      )}
+    </>
+  ) : (
+    bloodgroup === "B+" && (
+      <>
+        {nearestpositions.nearestLocations
+          .filter((result) => {
+            if (result.BloodGroup === bloodgroup) return result;
+          })
+          .map((items, index) => {
+            return (
+              <div className="dialoge-container">
+                <div className="visble">
+                  <div className="dia-flex">
+                    <label>Name</label>
+                    <span>
+                      <label>{items.Name}</label>
+                    </span>
+                  </div>
+
+                  <div className="dia-flex">
+                    <label>Blood Group</label>
+                    <span>
+                      <label>{items.BloodGroup}</label>
+                    </span>
+                  </div>
+                  <div className="dia-flex">
+                    <label>Amount</label>
+                    <span>
+                      <label>{items.Amount}</label>
+                    </span>
+                  </div>
+                  <div className="dia-flex">
+                    <label>Purpose</label>
+                    <span>
+                      <label>Accident</label>
+                    </span>
+                  </div>
+                  <button
+                onClick={() => {
+                  handlerf(items);
+                }}
+                id={index}
+              >
+                Accept
+              </button>
+                </div>
+              </div>
+            );
+          })}{" "}
+        {dat && hidden && (
+          <div className="hidden-div">
+            <div className="dia-flex">
               <label>Purpose</label>
-              <span><label>Accident</label></span>
-
+              <span>
+                <label>Accident</label>
+              </span>
             </div>
-            <button  id={index}>Accept</button>
+            <div className="dia-flex">
+              <label>Contact Number</label>
+              <span>
+                <label>{dat.Contact}</label>
+              </span>
+            </div>
+            <button className="message">Message</button>
+            <Link
+              to={{
+                pathname: "/Confirm",
+                search: `?value1=${dat.Name}&value2=${dat.Location}&value3=${dat.BloodGroup}`,
+              }}
+            >
+              Go to Component 2
+            </Link>
           </div>
-          </div>
-    
-            )
-   }
-
-   ):(bloodgroup==="A+"? recipientdetails.filter((result)=>{
-
-    if(result.BloodGroup===bloodgroup)
-      return result
-    }).map((items,index)=>{
-     
-    return(
-      
-      <div  className='dialoge-container'>
-        
-<div className='visble'>
-<div className='dia-flex'>
-  <label>Name</label>
-  <span><label>{items.Name}</label></span>
-</div>
-
-
-    <div className='dia-flex'>
-      <label>Blood Group</label>
-      <span><label>{items.BloodGroup}</label></span>
-
-    </div>
-    <div className='dia-flex'>
-      <label>Amount</label>
-      <span><label>{items.Amount}</label></span>
-
-    </div>
-    <div className='dia-flex'>
-      <label>Purpose</label>
-      <span><label>Accident</label></span>
-
-    </div>
-    <button  id={index}>Accept</button>
-  </div>
-  </div>
-
-    )}):(bloodgroup==="O-"?recipientdetails.filter((result)=>{
-      if(result.BloodGroup===bloodgroup)
-      return result
-    }).map((items,index)=>{
-
-      return(
-        
-        <div className='dialoge-container'>
-          
-  <div className='visble'>
-  <div className='dia-flex'>
-    <label>Name</label>
-    <span><label>{items.Name}</label></span>
-  </div>
-  
-  
-      <div className='dia-flex'>
-        <label>Blood Group</label>
-        <span><label>{items.BloodGroup}</label></span>
-  
-      </div>
-      <div className='dia-flex'>
-        <label>Amount</label>
-        <span><label>{items.Amount}</label></span>
-  
-      </div>
-      <div className='dia-flex'>
-        <label>Purpose</label>
-        <span><label>Accident</label></span>
-  
-      </div>
-      <button  id={index}>Accept</button>
-    </div>
-    </div>
-  
-      )}):(bloodgroup==="B+"&&recipientdetails.filter((result)=>{
-        if(result.BloodGroup===bloodgroup)
-      return result
-    }).map((items,index)=>{
-
-        return(
-          
-          <div className='dialoge-container'>
-            
-    <div className='visble'>
-    <div className='dia-flex'>
-      <label>Name</label>
-      <span><label>{items.Name}</label></span>
-    </div>
-    
-    
-        <div className='dia-flex'>
-          <label>Blood Group</label>
-          <span><label>{items.BloodGroup}</label></span>
-    
-        </div>
-        <div className='dia-flex'>
-          <label>Amount</label>
-          <span><label>{items.Amount}</label></span>
-    
-        </div>
-        <div className='dia-flex'>
-          <label>Purpose</label>
-          <span><label>Accident</label></span>
-    
-        </div>
-        <button  id={index}>Accept</button>
-      </div>
-      </div>
-    
-        )}))
-
-
-
-      )
-    
-    
+        )}
+      </>
     )
-    
-    
-    )
-   }
+  );
+};
 
-export default RequestPageWithoutBackend
+export default RequestPageWithoutBackend;

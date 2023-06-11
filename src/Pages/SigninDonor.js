@@ -16,7 +16,9 @@ const SigninDonor = () => {
         if(found){
           let bloodgroup=found.BloodGroup
           let Location =found.Location
-        nav('/RequestPage',{state:{name,number,bloodgroup,Location }})
+          let latitude=found.lat
+          let longitude = found.lon
+        nav('/RequestPage',{state:{name,number,bloodgroup,Location,latitude,longitude }})
         }
         else
         nav('/DonorMainpage')

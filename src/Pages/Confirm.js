@@ -5,8 +5,8 @@ const Confirm = (props) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const value1 = searchParams.get("value1");
-  const value2 = searchParams.get("value1");
-  const value3 = searchParams.get("value2");
+  const value2 = searchParams.get("value2");
+  const value3 = searchParams.get("value3");
   const [isDisabled, setIsDisabled] = useState(false);
 
   const handleClick = () => {

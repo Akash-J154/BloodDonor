@@ -1,8 +1,9 @@
 import React from 'react'
 import Select from 'react-select'
 import axios from 'axios'
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
+import useFindLatitudeLongitude from '../hooks/useFindLatitudeLongitude';
 
 
 const DonorMainpage = () => {
@@ -37,9 +38,11 @@ const DonorMainpage = () => {
       const handleSex = (selectedOption) => {
         setSex(selectedOption.value);
       }
-      
+      let {longitude,latitude} = useFindLatitudeLongitude(location)
+      console.log(latitude,longitude)
       const handleSubmit=(e)=>{
         e.preventDefault()
+       
         console.log(e)
         try{
            let response=axios.post(' http://127.0.0.1:8000/api/user/', {
@@ -62,8 +65,7 @@ const DonorMainpage = () => {
            console.log(error)
          }
       }
-    
-      
+     
   return (
     <div className='requestpage-back'>
     <div className='requestpage-container'>
