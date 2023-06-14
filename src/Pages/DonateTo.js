@@ -1,18 +1,17 @@
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDetails } from "../hooks/useDetails";
 import useNearestLocations from "../hooks/useNearestLocations";
 
-const RequestPageWithoutBackend = () => {
+const DonateTo = () => {
  
   let { recipientdetails } = useContext(useDetails);
   const [dat, setDat] = useState(null)
   const location = useLocation();
   
-  const { name, number, bloodgroup, Location,latitude,longitude } = location.state || {};
+  const { bloodgroup, latitude,longitude } = location.state || {};
   const [hidden, setHidden] = useState(false);
   console.log(latitude,longitude)
   let nearestpositions=useNearestLocations(recipientdetails,latitude,longitude)
@@ -317,4 +316,4 @@ const RequestPageWithoutBackend = () => {
   );
 };
 
-export default RequestPageWithoutBackend;
+export default DonateTo;

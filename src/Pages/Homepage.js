@@ -8,7 +8,7 @@ const Homepage = () => {
     <div className='home-container' >
     <div className='large-logo'><BsDropletFill size={50} color='#c21807'/><h1>Bloodlink</h1></div>
     <div className='option'>
-      <button onClick={()=>{nav('/RecipientMainPage')}}>Recipient</button>
+      <button onClick={()=>{nav('/SigninRecipient')}}>Recipient</button>
       <button onClick={()=>{nav('/SigninDonor')}}>Donor</button>
     </div>
   </div>

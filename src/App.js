@@ -10,7 +10,8 @@ import Confirm from './Pages/Confirm';
 import Homepage from './Pages/Homepage'
 import Community from './Pages/Community';
 import SigninDonor from './Pages/SigninDonor';
-import RequestPageWithoutBackend from './Pages/RequestPageWithoutBackend';
+import DonateTo from './Pages/DonateTo';
+import SigninRecipient from './Pages/SigninRecipient';
 
 
 function App() {
@@ -29,10 +30,11 @@ function App() {
       <Route exact path='/DonorMainpage' element={<DonorMainpage/>}></Route>
       <Route exact path='/RecipientMainpage' element={<RecipientMainpage/>}></Route>
       {/* <Route exact path='/Requestpage' element={<Requestpage/>}></Route> */}
-      <Route exact path='/Requestpage' element={<RequestPageWithoutBackend/>}></Route>
+      <Route exact path='/Requestpage' element={<DonateTo/>}></Route>
       <Route exact path='/Confirm' element={<Confirm/>}></Route>
       <Route exact path='/Community' element={<Community/>}></Route>
       <Route exact path='/SigninDonor' element={<SigninDonor/>}></Route>
+      <Route exact path='/SigninRecipient' element={<SigninRecipient/>}></Route>
       
     </Routes>
   </Router>
