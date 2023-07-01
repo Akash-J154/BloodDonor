@@ -1,33 +1,85 @@
 import React, { useContext } from "react";
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
+import {Device} from 'twilio-client';
 import { useDetails } from "../hooks/useDetails";
+
 import useNearestLocations from "../hooks/useNearestLocations";
 
-const DonateTo = () => {
- 
-  let { recipientdetails } = useContext(useDetails);
-  const [dat, setDat] = useState(null)
+const RequestBlood = () => {
+  
+  let { donordetails } = useContext(useDetails);
+  
   const location = useLocation();
   
   const { bloodgroup, latitude,longitude } = location.state || {};
-  const [hidden, setHidden] = useState(false);
-  console.log(latitude,longitude)
-  let nearestpositions=useNearestLocations(recipientdetails,latitude,longitude)
-  const handlerf = (item) => {
-    setDat(item);
-    console.log(dat);
-    setHidden(true);
-    console.log(dat)
-  };
-  console.log(nearestpositions.nearestLocations,"ytt")
+
+
+  let nearestpositions=useNearestLocations(donordetails,latitude,longitude)
+  // const jwt = require('jsonwebtoken');
+
+  // function generateJwt(apiKeySid, apiKeySecret, identity, ttl) {
+  //   const payload = {
+  //     iss: apiKeySid,
+  //     sub: identity,
+  //     iat: Math.floor(Date.now() / 1000),
+  //     exp: Math.floor(Date.now() / 1000) + ttl,
+  //   };
+  
+  //   const jwtOptions = {
+  //     algorithm: 'HS256',
+  //   };
+  
+  //   const token = jwt.sign(payload, apiKeySecret, jwtOptions);
+  //   return token;
+  // }
+  
+  // // Example usage
+  // const apiKeySid = 'your_api_key_sid';
+  // const apiKeySecret = 'your_api_key_secret';
+  // const identity = 'user-123';
+  // const ttl = 3600; // Token time-to-live in seconds
+  
+  // const jwtToken = generateJwt(apiKeySid, apiKeySecret, identity, ttl);
+  // console.log(jwtToken);
+  
+
+  const handleClick=()=>{
+    
+    const accessToken ={"accountSid":"ACa27a9cefccbf6e0385f9c7603629c26f","apiKeySid":"SK72877410d03933987decef945edf500e","apiKeySecret":"1fNjBE1Ol3FDNrcqP1Vzr7w9F4w36qZA"}
+    const toNumber = '+917306829337'; // Replace with the phone number you want to call
+    const fromNumber = '+14302336811';
+    
+    const device = new Device(accessToken);
+
+    device.on('ready', () => {
+      const params = { To: toNumber ,
+      From : fromNumber};
+      device.connect(params);
+    });
+    
+    device.on('connect', () => {
+      console.log('Connected to Twilio');
+    });
+
+    device.on('disconnect', () => {
+      console.log('Call ended');
+    });
+
+    device.error((error) => {
+      console.error('Twilio Device Error:', error.message);
+    });
+  }
+  
   return bloodgroup === "O+" ? (
     <>
       {nearestpositions.nearestLocations.map((items, index) => {
         return (
+          <div>
+          <button onClick={handleClick}>Contact Nearby Donors</button>
           <div className="dialoge-container">
+            
             <div className="visble">
+             
               <div className="dia-flex">
                 <label>Name</label>
                 <span>
@@ -53,43 +105,13 @@ const DonateTo = () => {
                   <label>Accident</label>
                 </span>
               </div>
-              <button
-                onClick={() => {
-                  handlerf(items);
-                }}
-                id={index}
-              >
-                Accept
-              </button>
+             
             </div>
+          </div>
           </div>
         );
       })}
-      {dat && hidden && (
-        <div className="hidden-div">
-          <div className="dia-flex">
-            <label>Purpose</label>
-            <span>
-              <label>Accident</label>
-            </span>
-          </div>
-          <div className="dia-flex">
-            <label>Contact Number</label>
-            <span>
-              <label>{dat.Contact}</label>
-            </span>
-          </div>
-          <button className="message">Message</button>
-          <Link
-            to={{
-              pathname: "/Confirm",
-              search: `?value1=${dat.Name}&value2=${dat.Location}&value2=${dat.BloodGroup}`,
-            }}
-          >
-            Go to Component 2
-          </Link>
-        </div>
-      )}
+     
     </>
   ) : bloodgroup === "A+" ? (
     <>
@@ -100,8 +122,11 @@ const DonateTo = () => {
         })
         .map((items, index) => {
           return (
+            <div>
+              <button>Contact Nearby Donors</button>
             <div className="dialoge-container">
               <div className="visble">
+              
                 <div className="dia-flex">
                   <label>Name</label>
                   <span>
@@ -127,43 +152,13 @@ const DonateTo = () => {
                     <label>Accident</label>
                   </span>
                 </div>
-                <button
-                onClick={() => {
-                  handlerf(items);
-                }}
-                id={index}
-              >
-                Accept
-              </button>
+              
               </div>
+            </div>
             </div>
           );
         })}{" "}
-      {dat && hidden && (
-        <div className="hidden-div">
-          <div className="dia-flex">
-            <label>Purpose</label>
-            <span>
-              <label>Accident</label>
-            </span>
-          </div>
-          <div className="dia-flex">
-            <label>Contact Number</label>
-            <span>
-              <label>{dat.Contact}</label>
-            </span>
-          </div>
-          <button className="message">Message</button>
-          <Link
-            to={{
-              pathname: "/Confirm",
-              search: `?value1=${dat.Name}&value2=${dat.Location}&value2=${dat.BloodGroup}`,
-            }}
-          >
-            Go to Component 2
-          </Link>
-        </div>
-      )}
+      
     </>
   ) : bloodgroup === "O-" ? (
     <>
@@ -173,8 +168,11 @@ const DonateTo = () => {
         })
         .map((items, index) => {
           return (
+            <div>
+              <button>Contact Nearby Donors</button>
             <div className="dialoge-container">
               <div className="visble">
+              <h1>Contact Nearby Donors</h1>
                 <div className="dia-flex">
                   <label>Name</label>
                   <span>
@@ -200,43 +198,13 @@ const DonateTo = () => {
                     <label>Accident</label>
                   </span>
                 </div>
-                <button
-                onClick={() => {
-                  handlerf(items);
-                }}
-                id={index}
-              >
-                Accept
-              </button>
+               
               </div>
+            </div>
             </div>
           );
         })}{" "}
-      {dat && hidden && (
-        <div className="hidden-div">
-          <div className="dia-flex">
-            <label>Purpose</label>
-            <span>
-              <label>Accident</label>
-            </span>
-          </div>
-          <div className="dia-flex">
-            <label>Contact Number</label>
-            <span>
-              <label>{dat.Contact}</label>
-            </span>
-          </div>
-          <button className="message">Message</button>
-          <Link
-            to={{
-              pathname: "/Confirm",
-              search: `?value1=${dat.Name}&value2=${dat.Location}&value2=${dat.BloodGroup}`,
-            }}
-          >
-            Go to Component 2
-          </Link>
-        </div>
-      )}
+    
     </>
   ) : (
     bloodgroup === "B+" && (
@@ -247,8 +215,11 @@ const DonateTo = () => {
           })
           .map((items, index) => {
             return (
+              <div>
+              <button>  Contact Nearby Donors</button>
               <div className="dialoge-container">
                 <div className="visble">
+                <h1>Contact Nearby Donors</h1>
                   <div className="dia-flex">
                     <label>Name</label>
                     <span>
@@ -274,46 +245,17 @@ const DonateTo = () => {
                       <label>Accident</label>
                     </span>
                   </div>
-                  <button
-                onClick={() => {
-                  handlerf(items);
-                }}
-                id={index}
-              >
-                Accept
-              </button>
+                 
                 </div>
+              </div>
               </div>
             );
           })}{" "}
-        {dat && hidden && (
-          <div className="hidden-div">
-            <div className="dia-flex">
-              <label>Purpose</label>
-              <span>
-                <label>Accident</label>
-              </span>
-            </div>
-            <div className="dia-flex">
-              <label>Contact Number</label>
-              <span>
-                <label>{dat.Contact}</label>
-              </span>
-            </div>
-            <button className="message">Message</button>
-            <Link
-              to={{
-                pathname: "/Confirm",
-                search: `?value1=${dat.Name}&value2=${dat.Location}&value3=${dat.BloodGroup}`,
-              }}
-            >
-              Go to Component 2
-            </Link>
-          </div>
-        )}
+       
+      
       </>
     )
   );
 };
 
-export default DonateTo;
+export default RequestBlood;

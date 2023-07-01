@@ -1,6 +1,7 @@
-import { React, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from 'axios'
+import { React, useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDonateMonth } from "../hooks/useDonateMonth";
+
 const Confirm = (props) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -8,36 +9,17 @@ const Confirm = (props) => {
   const value2 = searchParams.get("value2");
   const value3 = searchParams.get("value3");
   const [isDisabled, setIsDisabled] = useState(false);
-
+  var currentdate=new Date();
+  var month=currentdate.getMonth()+1;
+  var day=currentdate.getDate();
+  const nav =useNavigate()
+  let {setDate,setMonth}=useContext(useDonateMonth)
   const handleClick = () => {
     setIsDisabled(true);
-    try{
-        let response=axios.post(' http://127.0.0.1:8000/api/user/', {
-            'age':'32',
-                           'gender':'M',
-                          
-                           'location':'thiruvananthapuram',
-                           
-                           'weight':'56',
-                           'contact_number':'12326485',
-                           
-                          'blood_group':'A+',
-                          
-         },
-         {headers: {
-           "Content-Type": "application/json",
-         }}) 
-         console.log(response)
-         
-        
-
-      }
-      catch(error)
-      {
-        console.log(error)
-      }
-   
-    alert("successfully confirmed your points will be updated as soon as recipient accepts it")
+    setDate(day)
+    setMonth(month)
+    nav("/Homepage")
+    
     
     // perform button action 0here
   };

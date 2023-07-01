@@ -12,6 +12,7 @@ import Community from './Pages/Community';
 import SigninDonor from './Pages/SigninDonor';
 import DonateTo from './Pages/DonateTo';
 import SigninRecipient from './Pages/SigninRecipient';
+import RequestBlood from './Pages/RequestBlood';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Route exact path='/RecipientMainpage' element={<RecipientMainpage/>}></Route>
       {/* <Route exact path='/Requestpage' element={<Requestpage/>}></Route> */}
       <Route exact path='/Requestpage' element={<DonateTo/>}></Route>
+      <Route exact path='/RequestBlood' element={<RequestBlood/>}></Route>
       <Route exact path='/Confirm' element={<Confirm/>}></Route>
       <Route exact path='/Community' element={<Community/>}></Route>
       <Route exact path='/SigninDonor' element={<SigninDonor/>}></Route>

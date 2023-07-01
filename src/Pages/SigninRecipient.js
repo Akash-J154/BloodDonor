@@ -19,10 +19,10 @@ const SigninRecipient = () => {
           let Location =found.Location
           let latitude=found.lat
           let longitude = found.lon
-        nav('/RequestPage',{state:{name,number,bloodgroup,Location,latitude,longitude }})
+        nav('/RequestBlood',{state:{name,number,bloodgroup,Location,latitude,longitude }})
         }
         else
-        nav('/DonorMainpage')
+        nav('/RecipientMainpage')
     }
       
   return (

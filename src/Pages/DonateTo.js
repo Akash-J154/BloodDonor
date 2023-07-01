@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState} from "react";
+import {  useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDetails } from "../hooks/useDetails";
 import useNearestLocations from "../hooks/useNearestLocations";
@@ -17,16 +17,16 @@ const DonateTo = () => {
   let nearestpositions=useNearestLocations(recipientdetails,latitude,longitude)
   const handlerf = (item) => {
     setDat(item);
-    console.log(dat);
+    
     setHidden(true);
-    console.log(dat)
+  
   };
-  console.log(nearestpositions.nearestLocations,"ytt")
+  
   return bloodgroup === "O+" ? (
     <>
       {nearestpositions.nearestLocations.map((items, index) => {
         return (
-          <div className="dialoge-container">
+          <div className="dialoge-container" key={index}>
             <div className="visble">
               <div className="dia-flex">
                 <label>Name</label>
@@ -59,7 +59,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Accept
+                Donate
               </button>
             </div>
           </div>
@@ -133,7 +133,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Accept
+                Donate
               </button>
               </div>
             </div>
@@ -206,7 +206,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Accept
+                Donate
               </button>
               </div>
             </div>
@@ -280,7 +280,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Accept
+                Donate
               </button>
                 </div>
               </div>
