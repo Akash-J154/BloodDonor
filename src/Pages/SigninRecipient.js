@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useDetails } from '../hooks/useDetails'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import './SigninRecipient.css'
 const SigninRecipient = () => {
     const nav = useNavigate()
     const [name,setName] = useState(null)
@@ -26,17 +27,18 @@ const SigninRecipient = () => {
     }
       
   return (
-    <div>
-      
+    <div className='res-container'>
+      <div className='res-sign'>
+        <img className='res-icon' src='recepient.png'></img>
         <form onSubmit={handleSubmit}>
             <label>Name</label>
-            <input type={"text"} onChange={(e)=>setName(e.target.value)}></input>
+            <input placeholder='Enter your name' type={"text"} onChange={(e)=>setName(e.target.value)}></input>
             <label>PhoneNumber</label>
-            <input type={"number"} onChange={(e)=>setNumber(e.target.value)}></input>
+            <input placeholder='Enter your Phone number' type={"number"} onChange={(e)=>setNumber(e.target.value)}></input>
             <button>Submit</button>
         </form>
         <Link to="/RecipientMainpage">Register</Link>
-
+        </div>
     </div>
   )
 }

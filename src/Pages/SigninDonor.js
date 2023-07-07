@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useDetails } from '../hooks/useDetails'
 import { useNavigate,Link } from 'react-router-dom'
 import { useDonateMonth } from '../hooks/useDonateMonth'
+import './SigninDonor.css'
 const SigninDonor = () => {
     const nav = useNavigate()
     const [name,setName] = useState(null)
@@ -36,17 +37,19 @@ const SigninDonor = () => {
     }
       
   return (
-    <div>
-      
-        <form onSubmit={handleSubmit}>
-            <label>Name</label>
-            <input type={"text"} onChange={(e)=>setName(e.target.value)}></input>
-            <label>PhoneNumber</label>
-            <input type={"number"} onChange={(e)=>setNumber(e.target.value)}></input>
-            <button>Submit</button>
-        </form>
-        <Link to="/DonorMainpage">Register</Link>
-    </div>
+    <div className='don-container'>
+    <div className='don-sign'>
+      <img className='don-icon' src='donor.png'/>
+      <form onSubmit={handleSubmit}>
+          <label>Name</label>
+          <input placeholder='Enter your name' type={"text"} onChange={(e)=>setName(e.target.value)}></input>
+          <label>PhoneNumber</label>
+          <input  placeholder='Enter your phonenumber' type={"number"} onChange={(e)=>setNumber(e.target.value)}></input>
+          <button>Submit</button>
+      </form>
+      <Link to="/DonorMainpage">Register</Link>
+  </div>
+  </div>
   )
 }
 

@@ -13,12 +13,22 @@ import SigninDonor from './Pages/SigninDonor';
 import DonateTo from './Pages/DonateTo';
 import SigninRecipient from './Pages/SigninRecipient';
 import RequestBlood from './Pages/RequestBlood';
-
-
+import Loading from './Pages/Loading';
+import React, { useState, useEffect} from 'react';
 function App() {
-  return (
- 
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    // Simulate an asynchronous operation (e.g., API call or data fetching)
+    setTimeout(() => {
+      setIsLoading(false); // Set isLoading to false after the loading is complete
+    }, 2000); // Adjust the timeout duration to match your actual loading time
+  }, []);
+  return (
+ <>    {isLoading ? (
+      <Loading/> // Render the Loading component when isLoading is true
+    ) : (
+      
    
   <Router>
   {/* <Navbar/> */}
@@ -37,11 +47,14 @@ function App() {
       <Route exact path='/Community' element={<Community/>}></Route>
       <Route exact path='/SigninDonor' element={<SigninDonor/>}></Route>
       <Route exact path='/SigninRecipient' element={<SigninRecipient/>}></Route>
+      <Route exact path='/Loading' element={<Loading/>}></Route>
       
     </Routes>
   </Router>
- 
-  );
+ )}
+ </>
+ );
 }
+  
 
 export default App;

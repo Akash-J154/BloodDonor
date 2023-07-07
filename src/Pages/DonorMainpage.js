@@ -5,7 +5,7 @@ import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import useFindLatitudeLongitude from '../hooks/useFindLatitudeLongitude';
 
-
+import './DonorMainpage.css'
 const DonorMainpage = () => {
     const [hidden,setHidden]=useState(true);
   

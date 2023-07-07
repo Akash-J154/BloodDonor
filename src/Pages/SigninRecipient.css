@@ -1,0 +1,79 @@
+/* Styling for the container */
+.res-container {
+    background-image: url("bloodfrond.jpg");
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for the sign box */
+  .res-sign {
+    height: 80%;
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.464);
+    border:none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 7px;
+  }
+  
+  /* Styling for the form elements */
+  .res-sign form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    height: 80%;
+  }
+  
+  .res-sign form label {
+    font-weight:400;
+    font-family: poppins;
+    font-size: 14px;
+  }
+  
+  .res-sign form input[type="text"],
+  .res-sign form input[type="number"] {
+    padding: 5px;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background-color:transparent;
+    font-family: poppins;
+  }
+  
+  /* Styling for the submit button */
+  .res-sign form button {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 200px;
+    height: 50px;
+    font-size: 17px;
+    font-family: poppins;
+  }
+  
+  /* Styling for the register link */
+  .res-sign a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: rgb(18, 18, 82);
+    font-family: poppins;
+  }
+  .res-icon{
+    width: auto;
+    height: 180px;
+  }

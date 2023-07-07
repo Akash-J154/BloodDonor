@@ -4,7 +4,7 @@ import {  useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDetails } from "../hooks/useDetails";
 import useNearestLocations from "../hooks/useNearestLocations";
-
+import './DonateTo.css'
 const DonateTo = () => {
  
   let { recipientdetails } = useContext(useDetails);
@@ -22,11 +22,13 @@ const DonateTo = () => {
   
   };
   
-  return bloodgroup === "O+" ? (
-    <>
+  return <div  className="long">{bloodgroup === "O+" ? (
+    
+    <div className="doood">
       {nearestpositions.nearestLocations.map((items, index) => {
         return (
-          <div className="dialoge-container" key={index}>
+          
+          <div className="dialoge-container">
             <div className="visble">
               <div className="dia-flex">
                 <label>Name</label>
@@ -59,10 +61,11 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Donate
+                Accept
               </button>
             </div>
           </div>
+         
         );
       })}
       {dat && hidden && (
@@ -90,7 +93,7 @@ const DonateTo = () => {
           </Link>
         </div>
       )}
-    </>
+    </div>
   ) : bloodgroup === "A+" ? (
     <>
       {" "}
@@ -133,7 +136,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Donate
+                Accept
               </button>
               </div>
             </div>
@@ -206,7 +209,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Donate
+                Accept
               </button>
               </div>
             </div>
@@ -280,7 +283,7 @@ const DonateTo = () => {
                 }}
                 id={index}
               >
-                Donate
+                Accept
               </button>
                 </div>
               </div>
@@ -311,9 +314,12 @@ const DonateTo = () => {
             </Link>
           </div>
         )}
+        
       </>
+     
     )
-  );
+  )
+            }</div>
 };
 
 export default DonateTo;

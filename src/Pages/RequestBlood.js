@@ -15,32 +15,7 @@ const RequestBlood = () => {
 
 
   let nearestpositions=useNearestLocations(donordetails,latitude,longitude)
-  // const jwt = require('jsonwebtoken');
 
-  // function generateJwt(apiKeySid, apiKeySecret, identity, ttl) {
-  //   const payload = {
-  //     iss: apiKeySid,
-  //     sub: identity,
-  //     iat: Math.floor(Date.now() / 1000),
-  //     exp: Math.floor(Date.now() / 1000) + ttl,
-  //   };
-  
-  //   const jwtOptions = {
-  //     algorithm: 'HS256',
-  //   };
-  
-  //   const token = jwt.sign(payload, apiKeySecret, jwtOptions);
-  //   return token;
-  // }
-  
-  // // Example usage
-  // const apiKeySid = 'your_api_key_sid';
-  // const apiKeySecret = 'your_api_key_secret';
-  // const identity = 'user-123';
-  // const ttl = 3600; // Token time-to-live in seconds
-  
-  // const jwtToken = generateJwt(apiKeySid, apiKeySecret, identity, ttl);
-  // console.log(jwtToken);
   
 
   const handleClick=()=>{

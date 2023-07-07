@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../Component/Card'
 import Navbar from '../Component/Navbar'
+import './Community.css'
 const Community = () => {
   return (
     <>
